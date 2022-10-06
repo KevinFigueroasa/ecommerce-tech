@@ -1,10 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { Button, Col, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { addProductsCartThunk } from '../store/slices/productsCart.slice';
 
 const ProductsDetails = () => {
 
     const { id } = useParams()
+
+    const [amount, setAmount] = useState(1)
+    const dispatch = useDispatch()
 
     const productsList = useSelector(state => state.products)
 
@@ -15,19 +20,49 @@ const ProductsDetails = () => {
     const releatedProducts2 = releatedProducts.filter(product => product.id !== productDetails.id)
     console.log(releatedProducts)
 
+    const addToCart = () => {
+        alert('agregando al carrito')
+        const productsCart = {
+            id: id,
+            quantity: amount
+        }
+        dispatch(addProductsCartThunk(productsCart))
+    }
+
     return (
-        <div>
-            <h1>Products Details: {id}</h1>
-            <ul>
-                {
-                    releatedProducts2.map(product => (
-                        <Link key={product.id} to={`/products/${product.id}`}><li>{product.title}</li></Link>
-                    ))
-                }
-            </ul>
-            <h2>{productDetails?.title}</h2>
-            <img className='fluid' src={productDetails?.productImgs} width="200px" alt="" />
-        </div>
+
+        <Row>
+            <Col>
+                <img className='img-fluid' src={productDetails?.productImgs} width="600px" alt="" />
+            </Col>
+            <Col>
+                <div>
+                    <h1>Products Details: {id}</h1>
+                    <h2>{productDetails?.title}</h2>
+                    <p>{productDetails?.description}</p>
+                </div>
+                <div className='amount'>
+                    <Button className='me-3' onClick={() => setAmount(amount-1)}>
+                        -
+                    </Button>
+                    {amount}
+                    <Button className='ms-3' onClick={() => setAmount(amount+1)}>
+                        +
+                    </Button>
+
+                    <Button onClick={addToCart}>Add to cart</Button>
+                </div>
+            </Col>
+            <div className='releated-products-container'>
+                <ul>
+                    {
+                        releatedProducts2.map(product => (
+                            <Link key={product.id} to={`/products/${product.id}`}><li>{product.title}</li></Link>
+                        ))
+                    }
+                </ul>
+            </div>
+        </Row>
     );
 };
 

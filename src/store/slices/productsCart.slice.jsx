@@ -21,6 +21,20 @@ export const getProductsCartThunk = () => (dispatch) => {
         .finally(() => dispatch(setIsLoading(false)));
 }
 
+export const addProductsCartThunk = (body) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.post(`https://ecommerce-api-react.herokuapp.com/api/v1/cart`, body, getConfig())
+        .then(() => dispatch(getProductsCartThunk()))
+        .finally(() => dispatch(setIsLoading(false)));
+}
+
+export const purchaseCartThunk = () => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.post(`https://ecommerce-api-react.herokuapp.com/api/v1/purchases`, {}, getConfig())
+        .then(() => dispatch(setProductsCart([])))
+        .finally(() => dispatch(setIsLoading(false)));
+}
+
 export const { setProductsCart } = productsCartSlice.actions;
 
 export default productsCartSlice.reducer;
