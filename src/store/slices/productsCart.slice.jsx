@@ -8,19 +8,19 @@ export const productsCartSlice = createSlice({
     name: 'productsCart',
     initialState: [],
     reducers: {
-        setCart: (state, action) => {
+        setProductsCart: (state, action) => {
             return action.payload
         }
     }
 })
 
-export const getCartThunk = () => (dispatch) => {
+export const getProductsCartThunk = () => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/cart`, getConfig())
-        .then(res => dispatch(setCart(res.data)))
+        .then(res => dispatch(setProductsCart(res.data)))
         .finally(() => dispatch(setIsLoading(false)));
 }
 
-export const { setCart } = productsCartSlice.actions;
+export const { setProductsCart } = productsCartSlice.actions;
 
 export default productsCartSlice.reducer;

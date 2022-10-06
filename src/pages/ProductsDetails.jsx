@@ -21,7 +21,7 @@ const ProductsDetails = () => {
             <ul>
                 {
                     releatedProducts2.map(product => (
-                        <Link to={`/products/${product.id}`}><li>{product.title}</li></Link>
+                        <Link key={product.id} to={`/products/${product.id}`}><li>{product.title}</li></Link>
                     ))
                 }
             </ul>
