@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import Login from '../pages/Login';
 import { getProductsCartThunk } from '../store/slices/productsCart.slice';
 
 const CartSidebar = ({show, handleClose}) => {
