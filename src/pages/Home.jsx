@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const Home = () => {
 
     const [categories, setCategories] = useState([])
     const [productsFiltered, setProductsFiltered] = useState([])
-    const [ searchValueProduct, setSearchValueProduct ] = useState("")
+    const [searchValueProduct, setSearchValueProduct] = useState("")
 
     useEffect(() => {
         axios
@@ -48,44 +48,58 @@ const Home = () => {
     // }, []) SE CAMBIO DE LUGAR EL DISPACHT HACIA APP.JSX Para que se renderice siempre ya que no se estaba renderizando el cada producto
 
     return (
-        <div>
-            {
-                categories.map(category => (
-                    <Button
-                        key={category.id}
-                        onClick={() => filterCategory(category.id)} // cuando voy a enviar parametros, debo dolocarlo como función flecha
-                    >
-                        {category.name}
-                    </Button>
-                ))
-            }
 
-            <InputGroup className="mb-3">
-                <Form.Control
-                    placeholder="Search Products"
-                    onChange={e => setSearchValueProduct(e.target.value)}
-                    value={searchValueProduct}
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2"
-                />
-                <Button variant="outline-secondary" id="button-addon2" onClick={searchProducts}>
-                    Button
-                </Button>
-            </InputGroup>
+        <Container fluid>
+            <Row>
+                <Col lg={3}>
+                    <div>
+                        {
+                            categories.map(category => (
+                                <Button
+                                    key={category.id}
+                                    onClick={() => filterCategory(category.id)} // cuando voy a enviar parametros, debo dolocarlo como función flecha
+                                >
+                                    {category.name}
+                                </Button>
+                            ))
+                        }
+                    </div>
+                </Col>
+                <Col>
+                    <InputGroup className="mb-3">
+                        <Form.Control
+                            placeholder="Search Products"
+                            onChange={e => setSearchValueProduct(e.target.value)}
+                            value={searchValueProduct}
+                            aria-label="Recipient's username"
+                            aria-describedby="basic-addon2"
+                        />
+                        <Button variant="outline-secondary" id="button-addon2" onClick={searchProducts}>
+                            Button
+                        </Button>
+                    </InputGroup>
 
-            <h1>Welcome to I-Commerce</h1>
+                    <h1>Welcome to I-Commerce</h1>
 
-            <ul>
-                {
-                    productsFiltered.map(product => (
-                        <li key={product.id} onClick={() => navigate(`/products/${product.id}`)}>
-                            <h4>{product.title}</h4>
-                            <img src={product.productImgs} width="25%" alt="" />
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
+                    <Row xs={1} md={2} xl={3} className="g-4">
+                        {productsFiltered.map(product => (
+                            <Col>
+                                <Card
+                                    onClick={() => navigate(`/products/${product.id}`)}
+                                    style={{ height: "100%" }}
+                                >
+                                    <Card.Img width='25%' variant="top" src={product.productImgs} />
+                                    <Card.Body>
+                                        <Card.Title>{product.title}</Card.Title>
+                                        <Card.Text>{product.description}</Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
+                    </Row>
+                </Col>
+            </Row>
+        </Container >
     );
 };
 

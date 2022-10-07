@@ -27,7 +27,7 @@ function App() {
       <HashRouter>
         <Navigation />
         {isLoading && <LoadingScreen />} {/*Si isLoading es False, que no se muestre la pantalla de carga */}
-        <Container className='mt-5'>
+        <Container className='mt-5' fluid>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/products/:id' element={<ProductsDetails />} />
