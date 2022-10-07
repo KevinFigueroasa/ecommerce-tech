@@ -31,7 +31,7 @@ const CartSidebar = ({ show, handleClose }) => {
                         ))
                     }
                 </ListGroup>
-                <Button>Chekout</Button>
+                <Button onClick={() => dispatch(purchaseCartThunk())}>Chekout</Button>
             </Offcanvas.Body>
         </Offcanvas>
     );

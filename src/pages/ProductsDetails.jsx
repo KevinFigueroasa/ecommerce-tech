@@ -42,7 +42,7 @@ const ProductsDetails = () => {
                     <p>{productDetails?.description}</p>
                 </div>
                 <div className='amount'>
-                    <Button className='me-3' onClick={() => setAmount(amount-1)}>
+                    <Button disabled={amount <= 1} className='me-3' onClick={() => setAmount(amount-1)}>
                         -
                     </Button>
                     {amount}
@@ -50,7 +50,7 @@ const ProductsDetails = () => {
                         +
                     </Button>
 
-                    <Button onClick={addToCart}>Add to cart</Button>
+                    <Button className='ms-5' onClick={addToCart}>Add to cart</Button>
                 </div>
             </Col>
             <div className='releated-products-container'>
