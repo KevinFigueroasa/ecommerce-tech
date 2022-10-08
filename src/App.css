@@ -4,3 +4,25 @@
   /* padding: 2rem; */
   text-align: center;
 }
+
+.card-img-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  padding: 25px;
+  object-fit: scale-down;
+  background: #fff;
+}
+
+.card-img-top:hover {
+  background: #fff;
+  opacity: 0;
+  position: absolute;
+  transition: .8s;
+}
+
+.d-block {
+  object-fit: contain;
+  height: 300px;
+}

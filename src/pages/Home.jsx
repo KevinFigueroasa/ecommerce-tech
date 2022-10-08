@@ -79,19 +79,22 @@ const Home = () => {
                         </Button>
                     </InputGroup>
 
-                    <h1>Welcome to I-Commerce</h1>
+                    <h1 className="mt-5">Welcome to I-Commerce</h1>
 
                     <Row xs={1} md={2} xl={3} className="g-4">
                         {productsFiltered.map(product => (
                             <Col>
-                                <Card
+                                <Card className="mt-5"
                                     onClick={() => navigate(`/products/${product.id}`)}
                                     style={{ height: "100%" }}
                                 >
-                                    <Card.Img width='25%' variant="top" src={product.productImgs} />
+                                    <div className='img-card'>
+                                        <Card.Img style={{position: 'absolute'}} variant="top" src={product.productImgs} />
+                                        <Card.Img className='over' variant="top" src={product.productImgs[1]} />
+                                    </div>
                                     <Card.Body>
-                                        <Card.Title>{product.title}</Card.Title>
-                                        <Card.Text>{product.description}</Card.Text>
+                                        <Card.Title><b>{product.title}</b></Card.Title>
+                                        <Card.Text>${product.price}</Card.Text>
                                     </Card.Body>
                                 </Card>
                             </Col>

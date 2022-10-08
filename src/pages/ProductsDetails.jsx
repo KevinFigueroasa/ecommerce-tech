@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Carousel, Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { addProductsCartThunk } from '../store/slices/productsCart.slice';
@@ -30,10 +30,31 @@ const ProductsDetails = () => {
     }
 
     return (
-
         <Row>
             <Col>
-                <img className='img-fluid' src={productDetails?.productImgs} width="600px" alt="" />
+                <Carousel fade slide={false} variant="dark">
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-50 mx-auto my-5"
+                            src={productDetails?.productImgs[0]}
+                            alt="First slide"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-50 mx-auto my-5"
+                            src={productDetails?.productImgs[1]}
+                            alt="Second slide"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img 
+                            className="d-block w-50 mx-auto my-5"
+                            src={productDetails?.productImgs[2]}
+                            alt="Third slide"
+                        />
+                    </Carousel.Item>
+                </Carousel>
             </Col>
             <Col>
                 <div>
@@ -42,11 +63,11 @@ const ProductsDetails = () => {
                     <p>{productDetails?.description}</p>
                 </div>
                 <div className='amount'>
-                    <Button disabled={amount <= 1} className='me-3' onClick={() => setAmount(amount-1)}>
+                    <Button disabled={amount <= 1} className='me-3' onClick={() => setAmount(amount - 1)}>
                         -
                     </Button>
                     {amount}
-                    <Button className='ms-3' onClick={() => setAmount(amount+1)}>
+                    <Button className='ms-3' onClick={() => setAmount(amount + 1)}>
                         +
                     </Button>
 
